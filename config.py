@@ -1,3 +1,5 @@
+
+
 msgDoEmail ='Olá!\n' \
             'Verifiquei que há aqui um novo arquivo para você. É de extrema importância que você leia o material totalmente antes de solicitar correções, abra o arquivo pelo computador para não ter problemas na visualização da formatação e não esqueça de preencher seus dados pessoais.\n' \
             'Qualquer correção ou mudança é só você sinalizar no próprio arquivo, grifando a parte que precisa ser corrigida e na sequência entrar em contato com a sua atendente, enviando uma mensagem escrita especificando qual a modificação você quer solicitar. Desta forma sua solicitação chegará rapidamente a produção.\n\n' \

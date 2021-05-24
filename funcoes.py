@@ -1,6 +1,8 @@
 import pandas as pd
+import shutil
 import os.path
-from glob import glob
+from pathlib import Path
+#from glob import glob
 from os import listdir
 from os.path import isfile, join
 # Bibliotecas P/ Email
@@ -9,13 +11,14 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import mimetypes
-#import os
+from datetime import datetime
 import smtplib
 import config as cf
 
 
 
 
+hoje = datetime.today().strftime('%d-%m-%y_%H-%M-%S')
 pastaClientes = r"C:\GITHUB\SATEL\emailJulia\ExcelBase"
 pastaIds = r"C:\GITHUB\SATEL\emailJulia\ArquivosParaEnvio"
 
@@ -30,8 +33,10 @@ for df in dataFrames:
 
 for doc in docs:
     os.chdir('ArquivosParaEnvio/')
+    #form = doc
     idCliente = doc.split(".docx")[0]
     row = todos.loc[todos['id_cliente'].str.contains(idCliente)]
+
     if len(row):
         email = row["email"].values[0]
         ###----MeuCodigo----####
@@ -62,7 +67,11 @@ for doc in docs:
         server.login(cf.meu_email, cf.senha)
         text = msg.as_string()
         server.sendmail(cf.meu_email, email_destino, text)
-        print('Enviado com sucesso: ' + doc)
+        print('Enviado com sucesso: ' + doc + '\n')
+        attachment.close()
+
+        Path(f'../Enviados/{hoje}').mkdir(parents=True, exist_ok=True)
+        shutil.move(doc,f'../Enviados/{hoje}')
         server.quit()
         #--------------------------------------------------------------------#
         #ENVIA O EMAIL
